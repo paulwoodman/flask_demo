@@ -24,12 +24,16 @@ def before_request():
 
 
 @app.route('/')
+@app.route('/<int:page>')
 @login_required
-def index():
-    techtalks = TechTalk.query.all()
+def index(page=1):
+    techtalks = TechTalk.query.paginate(page, TABLEROWS_PER_PAGE, False)
+    #paginated_techtalks = TechTalk.paginate(page, TABLEROWS_PER_PAGE, False)
+
     return render_template(
         'index.html',
         title='Home',
+        user=current_user,
         techtalks=techtalks
     )
 
@@ -84,7 +88,7 @@ def after_login(resp):
 @app.route('/user/<nickname>')
 @app.route('/user/<nickname>/<int:page>')
 @login_required
-def user(nickname, page = 1):
+def user(nickname, page=1):
     user = User.query.filter_by(nickname=nickname).first()
     if user == None:
         flash('User ' + nickname + ' not found.')
@@ -144,4 +148,3 @@ def internal_error(error):
 def internal_error(error):
     db.session.rollback()
     return render_template('500.html'), 500
-

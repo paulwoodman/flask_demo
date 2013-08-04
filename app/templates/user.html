@@ -28,12 +28,15 @@
             </tr>
         </thead>
         <tbody>
-        {% for talks in techtalks.items %}
+        {% for talk in techtalks.items %}
             <tr valign="top">
                 <td>{{talk.title}}</td>
                 <td>{{talk.created_at}}</td>
-                <td><img src="{{talk.author.avatar(50)}}"></td>
-                <td><i>{{talk.author.nickname}} says:</i><br>{{post.body}}</td>
+                <td>{{talk.scheduled_at }}</td>
+                <td>
+					<img src="{{talk.author.avatar(30)}}">
+					<i>{{talk.author.nickname}}</i>
+				</td>
             </tr>
         {% endfor %}
         </tbody>

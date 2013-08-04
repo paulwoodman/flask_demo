@@ -50,6 +50,6 @@ if not app.debug:
 
 
 from app import views, models
-from models import User
+from models import User, TechTalk
 admin.add_view(ModelView(User, db.session))
-
+admin.add_view(ModelView(TechTalk, db.session))
