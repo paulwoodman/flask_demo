@@ -1,0 +1,42 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<table>
+    <tr valign="top">
+        <td><img src="{{user.avatar(128)}}"></td>
+        <td>
+            <h1>User: {{user.nickname}}</h1>
+            {% if user.about_me %}<p>{{user.about_me}}</p>{% endif %}
+            {% if user.last_seen %}<p><i>Last seen on: {{user.last_seen}}</i></p>{% endif %}
+            {% if user.id == g.user.id %}
+                <a href="{{url_for('edit')}}">Edit your profile</a>
+            {% endif %}
+            </p>
+        </td>
+    </tr>
+</table>
+<hr>
+
+     <table border=1>
+        <thead>
+			<tr>
+                <th>Title</th>
+                <th>Created On</th>
+                <th>Scheduled For</th>
+                <th>Presenter</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for talks in techtalks.items %}
+            <tr valign="top">
+                <td>{{talk.title}}</td>
+                <td>{{talk.created_at}}</td>
+                <td><img src="{{talk.author.avatar(50)}}"></td>
+                <td><i>{{talk.author.nickname}} says:</i><br>{{post.body}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

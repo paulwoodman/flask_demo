@@ -1,0 +1,28 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Hi, {{g.user.nickname}}!</h1>
+
+    <table border=1>
+        <thead>
+			<tr>
+                <th>Title</th>
+                <th>Created On</th>
+                <th>Scheduled For</th>
+                <th>Presenter</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for talks in techtalks.items %}
+            <tr valign="top">
+                <td>{{talk.title}}</td>
+                <td>{{talk.created_at}}</td>
+                <td><img src="{{talk.author.avatar(50)}}"></td>
+                <td><i>{{talk.author.nickname}} says:</i><br>{{post.body}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
