@@ -4,6 +4,8 @@ from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager, AnonymousUser
 from flask.ext.openid import OpenID
+from flask.ext.admin import Admin
+from flask.ext.admin.contrib.sqlamodel import ModelView
 
 from config import basedir, ADMINS
 
@@ -19,7 +21,8 @@ db = SQLAlchemy(app)
 # Initialize openID object
 oid = OpenID(app, os.path.join(basedir, 'tmp'))
 
-
+# Initialize Admin module
+admin = Admin(app)
 
 # Initialize Login Module
 
@@ -47,3 +50,6 @@ if not app.debug:
 
 
 from app import views, models
+from models import User
+admin.add_view(ModelView(User, db.session))
+
