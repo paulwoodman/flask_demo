@@ -9,6 +9,7 @@ OPENID_PROVIDERS = [
     { 'name': 'Yahoo', 'url': 'https://me.yahoo.com' }]
 
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'sqlite_database.db')
+print "SQL DB URI: %s" % SQLALCHEMY_DATABASE_URI
 
 # administrator list
 ADMINS = ['sandeep.sidhu@rackspace.co.uk']

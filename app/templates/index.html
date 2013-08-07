@@ -2,30 +2,31 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h3>Hi, {{g.user.nickname}}!</h3>
+<div class="row-fluid"></div>
+	<div class="span10">
+		<h3> Scheduled Talks</h3>
+	</div>
 
-    <table border=1>
-        <thead>
-			<tr>
-                <th>Title</th>
-                <th>Created On</th>
-                <th>Scheduled For</th>
-                <th>Presenter</th>
-            </tr>
-        </thead>
+	{% for talk in techtalks.items %}
+	<div class="span8">
+    <table class="table table-bordered table-condensed" >
         <tbody>
-        {% for talk in techtalks.items %}
-            <tr valign="top">
-                <td>{{talk.title}}</td>
-                <td>{{talk.created_at}}</td>
-                <td>{{talk.scheduled_at }}</td>
+
+            <tr>
+                <td colspan=2>{{talk.title}}</td>
+			<tr>
+				<td colspan=2>{{talk.description}}</td>
+			</tr>
+			<tr>
+				<td>Schedule Date:{{talk.scheduled_at }}</td>
                 <td>
-					<img src="{{talk.author.avatar(50)}}">
-					<i>{{talk.author.nickname}}</i>
+					<img src="{{talk.author.avatar(30)}}"> - <i>{{talk.author.nickname}}</i>
 				</td>
-            </tr>
-        {% endfor %}
+			</tr>
         </tbody>
     </table>
+	</div>
+    {% endfor %}
 
+</div>
 {% endblock %}

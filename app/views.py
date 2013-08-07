@@ -25,7 +25,6 @@ def before_request():
 
 @app.route('/')
 @app.route('/<int:page>')
-@login_required
 def index(page=1):
     techtalks = TechTalk.query.paginate(page, TABLEROWS_PER_PAGE, False)
     #paginated_techtalks = TechTalk.paginate(page, TABLEROWS_PER_PAGE, False)
